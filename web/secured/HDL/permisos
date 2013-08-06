@@ -1,0 +1,11 @@
+select id,nombre,mascara,descripcion from PermisoAcciones where
+ id=(select permisoAcciones.id from PermisosAcciones as obj1 where obj1.permisos.id=(select roles.id 
+from RolesPermisos as obj2 where
+obj2.roles.id=(select id from Roles where
+ id=(select id from RolesUsuarios where 
+usuario_id=(select id from Usuarios where id=1)))))
+
+
+#NOMBRE DE PERMISO MEDIANTE EL ID DE ROL
+select nombre from Permisos where id=(select permisos.id from RolesPermisos as jo  where 
+jo.roles.id=(select id from Roles where nombre='CRUD-RWX2'))

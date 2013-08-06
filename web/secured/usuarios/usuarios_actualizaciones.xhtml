@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <f:view contentType="text/html">
+    <h:head>
+        <title>Facelet Title</title>
+        
+        <script>
+
+    function callServletAct(){
+                
+               //$("#form_consultas\\:nombre").val("fdsdf");
+               //alert($('#form_actualizaciones\\:matricula').val());
+              
+            $.ajax(
+    	    {
+    	        url: serverP,
+    	        data: {matricula:$('#form_actualizaciones\\:matricula').val()},
+    	        success: function(response)
+    	        {
+                        
+                         $("#form_actualizaciones\\:nombre").val(response.split(",")[0]);
+                         $("#form_actualizaciones\\:apellidop").val(response.split(",")[1]);
+                         $("#form_actualizaciones\\:apellidom").val(response.split(",")[2]);
+                         if(response.split(",")[3] === 'h')
+                         $("#form_actualizaciones\\:sexo").val('Hombre');
+                         else if(response.split(",")[3] === 'm')
+                         $("#form_actualizaciones\\:sexo").val('Mujer');
+                         else
+                         $("#form_actualizaciones\\:sexo").val('-');
+                     
+                         $("#form_actualizaciones\\:fechanacimiento").val(response.split(",")[4]);
+                         $("#form_actualizaciones\\:pais").val(response.split(",")[5]);
+                         $("#form_actualizaciones\\:estado").val(response.split(",")[6]);
+                         $("#form_actualizaciones\\:puesto").val(response.split(",")[7]);
+                         $("#form_actualizaciones\\:descripcion").val(response.split(",")[8]);
+                         $("#form_actualizaciones\\:rol").val(response.split(",")[9]);
+                         $("#form_actualizaciones\\:fechaalta").val(response.split(",")[10]);
+		    	 
+    	        }//success
+	     });//.ajax
+               
+            }
+
+             
+         </script>
+        
+    </h:head>
+        <h:body>
+        
+        
+        <h:form id="form_actualizaciones">   
+            
+        <p:messages id="messages" showDetail="false" autoUpdate="true"/>
+        <h:panelGrid columns="2" id="pan_consulta"> 
+            <h:outputLabel for="matricula" value="matricula a consultar: " />  
+            <p:inputText id="matricula" value="#{actualizacionUsuarioBean.matricula}" required="true">
+                <p:ajax event="keyup" update="nombreo"   
+                        oncomplete="callServletAct();"/>  
+            </p:inputText>
+              
+            <h:outputLabel id="nombreo" for="nombre" value="Nombre:"/>  
+            <p:inputText  id="nombre" value="#{actualizacionUsuarioBean.nombre}"  required="false" disabled="true"/> 
+                 
+            <h:outputLabel for="apellidop" value="apellidop: "  />  
+            <p:inputText id="apellidop" value="#{actualizacionUsuarioBean.apellidop}" required="false" disabled="true"/>
+            
+            <h:outputLabel for="apellidom1" value="apellidom: "  />  
+            <p:inputText id="apellidom1" value="#{actualizacionUsuarioBean.apellidom}" required="false" disabled="true" />
+             
+            <h:outputLabel for="sexo" value="sexo: "  />  
+            <p:inputText id="sexo"  required="false" disabled="true"/> 
+            
+            <h:outputLabel for="fechanacimiento" value="fechanacimiento: "  />  
+            <p:inputText id="fechanacimiento" value="#{actualizacionUsuarioBean.fechaNacmiento}" required="false" disabled="true"/>
+            
+            <h:outputLabel for="pais" value="pais: "  />  
+            <p:inputText id="pais" value="#{actualizacionUsuarioBean.pais}" required="false" disabled="true"/>
+            
+            <h:outputLabel for="estado" value="estado: "  />  
+            <p:inputText id="estado" value="#{actualizacionUsuarioBean.estado}" required="false" disabled="true"/>
+            
+            <h:outputLabel for="puesto" value="puesto: "  />  
+            <p:inputText id="puesto" value="#{actualizacionUsuarioBean.puesto}" required="false" disabled="true"/>
+            
+            <h:outputLabel for="descripcion" value="descripcion: "  />  
+            <p:inputText id="descripcion" value="#{actualizacionUsuarioBean.descripcion}" required="false" disabled="true"/>
+            
+             <h:outputLabel for="rol" value="rol: "  />  
+             <p:inputText id="rol" value="#{actualizacionUsuarioBean.rol}" required="false" disabled="true"/>
+             
+              <h:outputLabel for="fechaalta" value="fecha alta:"  />  
+              <p:inputText id="fechaalta" value="#{actualizacionUsuarioBean.fechaInicio}" required="false" disabled="true"/>
+              
+        </h:panelGrid>
+        </h:form>
+        
+        
+
+        
+    </h:body>
+    </f:view>
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/07/2013 03:44:35 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.RolesPermisos" table="roles_permisos" schema="usuarios">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="roles" class="com.reservaciones.mapeos.Roles" fetch="select">
+            <column name="role_id" />
+        </many-to-one>
+        <many-to-one name="permisos" class="com.reservaciones.mapeos.Permisos" fetch="select">
+            <column name="permisos_id" />
+        </many-to-one>
+        <property name="fechacreacion" type="date">
+            <column name="fechacreacion" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

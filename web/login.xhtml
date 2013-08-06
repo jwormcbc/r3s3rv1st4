@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+        <h:head>
+        <title>Login form</title>
+            <style>
+ body 
+{
+background-image:url('recursos/fondo4_reservista.jpg');
+background-color:#cccccc;
+font-size: 1.5em;
+}
+
+#login-form{
+     position:absolute;
+     left:40%;
+     top:30%;
+     margin:-75px 0 0 -135px;
+}
+
+.loginTxt{
+        text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+        color: #ffffff;
+        opacity: 0.7;
+        font: 1.5em 'Museo700';
+
+}
+
+        </style>
+    </h:head>
+    <h:body>
+       
+        
+        <div align="center">
+        
+           <h:form id="login-form" class="loginTxt">
+           <h2>Ingreso Al Sistema</h2>
+           <h:outputText  value="Usuario:"/>
+           <p:inputText value="#{loginBean.username}" id="username"/>
+           <br/>
+           <h:outputText  value="Password:"/>
+           <p:password value="#{loginBean.password}" id="password"/>
+           <br/>
+           <p:commandButton id="ingresar" value="Login" action="#{loginBean.doLogin}"/>
+           <br/>
+           <p:commandLink action="#{navigationBean.redirectToInfo}" value="Info page"/>
+           <br/>
+           <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+           <br/>
+           
+           
+            <p:tooltip for="username" value="ingresa tu usuario" showEffect="fade" hideEffect="fade" />  
+            <p:tooltip for="password" value="ingresa tu contraseña" showEffect="fade" hideEffect="fade" />
+            <p:tooltip for="ingresar" value="Acceso al sistema" showEffect="fade" hideEffect="fade" />
+        </h:form>
+        </div>
+                        
+        
+    </h:body>
+</html>
+

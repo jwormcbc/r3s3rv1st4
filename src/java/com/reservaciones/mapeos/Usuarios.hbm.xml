@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/07/2013 03:44:35 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.Usuarios" table="usuarios" schema="usuarios">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="matricula" type="string">
+            <column name="matricula" length="50" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="50" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="apellido1" length="50" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="apellido2" length="50" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="10" />
+        </property>
+        <property name="fechanacimiento" type="date">
+            <column name="fechanacimiento" length="13" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" length="50" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="50" />
+        </property>
+        <property name="puesto" type="string">
+            <column name="puesto" length="50" />
+        </property>
+        <property name="online" type="java.lang.Boolean">
+            <column name="online" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="80" />
+        </property>
+        <property name="fechacreacion" type="date">
+            <column name="fechacreacion" length="13" />
+        </property>
+        <set name="rolesUsuarioses" inverse="true">
+            <key>
+                <column name="usuario_id" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.RolesUsuarios" />
+        </set>
+    </class>
+</hibernate-mapping>
