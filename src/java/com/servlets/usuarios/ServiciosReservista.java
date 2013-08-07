@@ -67,7 +67,7 @@ private static final int campos=11;
         mensajeFinal+=""+dateFormat.format(u.getFechacreacion());
         
         out.println(mensajeFinal);
-        
+        System.out.println(mensajeFinal);
     }else{
     
         for(int i=0;i<campos;i++)

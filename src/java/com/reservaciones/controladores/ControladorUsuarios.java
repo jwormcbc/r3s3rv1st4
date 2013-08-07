@@ -34,8 +34,9 @@ public class ControladorUsuarios {
            }*/
             
             ControladorUsuarios cu=new ControladorUsuarios();
-            cu.getRoles();
-           
+            //cu.getRoles();
+            //cu.actualizacionUsuarios("000000", "julio", "rivera", "rojas", "sexo", "1900-09-09", "pais", "estado", "puesto", "descripcion","CRUD-RWX1");
+           // System.out.println("" + cu.actualizaRol("CRUD-RWX2", "000000"));
         }
         
       public boolean altaUsuario(String matricula,String nombre,String password,String apellidop,String apellidom,String sexo,
@@ -48,6 +49,14 @@ public class ControladorUsuarios {
           
        }
        
+      
+      public boolean actualizacionUsuarios(String matricula,String nombre,String apellidop,String apellidom,String sexo,
+                                 String fechaNacimiento,String pais,String estado,String puesto,String descripcion,String rol){
+       
+      return uh.doActualizacionDeUsuario(matricula, nombre, apellidop, apellidom, sexo, fechaNacimiento, pais, estado, puesto, descripcion,rol);
+          
+       }
+      
        public Usuarios buscarUsuario(String matricula){
            Usuarios u=uh.findUser(matricula);
            try{
@@ -88,6 +97,12 @@ public class ControladorUsuarios {
         return permisoNombre;
          }
           
+         public boolean actualizaRol(String rol, String matricula){
          
+             if(uh.updateRolUser(rol, matricula))
+             return true;
+             else
+             return false;
+         }
     
 }

@@ -44,7 +44,7 @@ public class LoginHelper {
 " id=(select permisoAcciones.id from PermisosAcciones as obj1 where obj1.permisos.id=(select roles.id \n" +
 "from RolesPermisos as obj2 where\n" +
 "obj2.roles.id=(select id from Roles where\n" +
-" id=(select id from RolesUsuarios where \n" +
+" id=(select roles.id from RolesUsuarios where \n" +
 "usuario_id=(select id from Usuarios where matricula='"+matricula+"')))))");
         usuarioPermisos = (PermisoAcciones) q.uniqueResult();
     } catch (Exception e) {

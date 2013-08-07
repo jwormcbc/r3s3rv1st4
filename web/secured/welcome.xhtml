@@ -17,6 +17,7 @@
     
         
 <p:layout fullPage="true">   
+    <p:ajax event="close" listener="#{loginBean.doLogout()}"/>
     
     <p:layoutUnit position="north" size="100"  resizable="false" closable="true" collapsible="true">
         <h1 align="center">Reservista</h1>
@@ -48,7 +49,8 @@
         <p:treeNode>  
             <h:outputText value="#{nodeS}" />  
         </p:treeNode>  
-        </p:tree>  
+        </p:tree>
+        <p:commandLink action="#{loginBean.doLogout}" value="Salir"/> 
     </h:form>
         
     </p:tab>  

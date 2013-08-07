@@ -92,11 +92,12 @@ public class UsuariosHelper {
         org.hibernate.Transaction tx = session.beginTransaction();
         Query q = session.createQuery ("select id from RolesUsuarios as ru where ru.usuarios.matricula='"+matriculaUsuario+"'");
         role = (Integer) q.uniqueResult();
-        
+        return (Integer.toString(role));
     } catch (Exception e) {
       e.printStackTrace();
+      return (Integer.toString(role));
     }
-    return (Integer.toString(role));
+    
 }
     
     
@@ -105,7 +106,7 @@ public class UsuariosHelper {
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
         Query q = session.createQuery ("select nombre from Permisos where id=(select permisos.id from RolesPermisos as jo  where \n" +
-"jo.roles.id=(select id from Roles where nombre='"+nombre_rol+"'))");
+        "jo.roles.id=(select id from Roles where nombre='"+nombre_rol+"'))");
         role = (String) q.uniqueResult();
         
     } catch (Exception e) {
@@ -126,6 +127,97 @@ public class UsuariosHelper {
     }
     return roles;
 }
+       
+ public boolean doActualizacionDeUsuario(String matricula,String nombre,String apellidop,String apellidom,String sexo,
+                                 String fechaNacimiento,String pais,String estado,String puesto,String descripcion,String new_Rol) {
+    
+     
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        System.out.println("UPDATE Usuarios SET nombre='"+nombre+"'"
+                                                        +", apellido1='"+apellidop+"'"
+                                                        +", apellido2='"+apellidom+"'"
+                                                        +", sexo='"+sexo+"'"
+                                                        +", fechanacimiento='"+fechaNacimiento+"'"
+                                                        +", pais='"+pais+"'"
+                                                        +", estado='"+estado+"'"
+                                                        +", puesto='"+puesto+"'"
+                                                        +", descripcion='"+descripcion+"'"
+                                                        +" where matricula='"+matricula+"'");
+        Query q = session.createQuery ("UPDATE Usuarios SET nombre='"+nombre+"'"
+                                                        +", apellido1='"+apellidop+"'"
+                                                        +", apellido2='"+apellidom+"'"
+                                                        +", sexo='"+sexo+"'"
+                                                        +", fechanacimiento='"+fechaNacimiento+"'"
+                                                        +", pais='"+pais+"'"
+                                                        +", estado='"+estado+"'"
+                                                        +", puesto='"+puesto+"'"
+                                                        +", descripcion='"+descripcion+"'"
+                                                        +" where matricula='"+matricula+"'");
+        int result=q.executeUpdate();
+        q = session.createQuery ("UPDATE RolesUsuarios as obj SET obj.roles.id=(select id from Roles where nombre='"+new_Rol+"')"
+                                                        +" where obj.usuarios.id=(select id from Usuarios where matricula='"+matricula+"')");
+        result=q.executeUpdate();
+        
+        
+        
+        
+        session.getTransaction().commit();
+        return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+   
+}
+ 
+ public boolean updateRolUser(String new_Rol,String usuarioMatricula ){
+     try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        Query q = session.createQuery ("UPDATE RolesUsuarios as obj SET obj.roles.id=(select id from Roles where nombre='"+new_Rol+"')"
+                                                        +" where obj.usuarios.id=(select id from Usuarios where matricula='"+usuarioMatricula+"')");
+        int result=q.executeUpdate();
+        session.getTransaction().commit();
+        return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    } 
+     
+ }
+ 
+ public String getIdByNombreRol(String nombre){
+    Roles role=null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        Query q = session.createQuery ("select id from Roles where nombre='"+nombre+"'");
+        role = (Roles) q.uniqueResult();
+        
+        if(role!=null)
+        return Integer.toString(role.getId());
+        
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return "";
+ }
+ 
+  public String getIdByMatriculaUsurio(String matricula){
+    Usuarios idUsuario=null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        Query q = session.createQuery ("select id from Usuarios where matricula='"+matricula+"'");
+         idUsuario= (Usuarios) q.uniqueResult();
+        
+        if(idUsuario!=null)
+        return Integer.toString(idUsuario.getId());
+        
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return "";
+ }
+    
         
     
 }

@@ -84,13 +84,11 @@ public class TreeBean implements Serializable {
             case P777:
                          node0 = new DefaultTreeNode("configuracion", root);  
                          node1 = new DefaultTreeNode("ayuda", root);  
-                         node2 = new DefaultTreeNode("contacto", root);  
-                         node3 = new DefaultTreeNode("Salir", root);
+                         node2 = new DefaultTreeNode("contacto", root);
                 break;
             case P775:   
                          node1 = new DefaultTreeNode("ayuda", root);  
-                         node2 = new DefaultTreeNode("contacto", root);  
-                         node3 = new DefaultTreeNode("Salir", root);  
+                         node2 = new DefaultTreeNode("contacto", root); 
                 break;
             default:
                 if(ninguno){
@@ -146,6 +144,8 @@ public class TreeBean implements Serializable {
                        RequestContext.getCurrentInstance().execute("dlg_consultas.show();");
                     }else if(nodo.equals("Actualizaciones")){
                        RequestContext.getCurrentInstance().execute("dlg_actualizacion.show();");
+                    }else if(nodo.equals("Bajas")){
+                       RequestContext.getCurrentInstance().execute("dlg_bajas.show();");
                     }else if(nodo.equals("Bajas")){
                        RequestContext.getCurrentInstance().execute("dlg_bajas.show();");
                     }

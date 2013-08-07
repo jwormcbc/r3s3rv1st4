@@ -65,39 +65,44 @@
             </p:inputText>
               
             <h:outputLabel id="nombreo" for="nombre" value="Nombre:"/>  
-            <p:inputText  id="nombre" value="#{actualizacionUsuarioBean.nombre}"  required="false" disabled="true"/> 
+            <p:inputText  id="nombre" value="#{actualizacionUsuarioBean.nombre}"  required="true" disabled="false"/> 
                  
             <h:outputLabel for="apellidop" value="apellidop: "  />  
-            <p:inputText id="apellidop" value="#{actualizacionUsuarioBean.apellidop}" required="false" disabled="true"/>
+            <p:inputText id="apellidop" value="#{actualizacionUsuarioBean.apellidop}" required="true" disabled="false"/>
             
-            <h:outputLabel for="apellidom1" value="apellidom: "  />  
-            <p:inputText id="apellidom1" value="#{actualizacionUsuarioBean.apellidom}" required="false" disabled="true" />
+            <h:outputLabel for="apellidom" value="apellidom: "  />  
+            <p:inputText id="apellidom" value="#{actualizacionUsuarioBean.apellidom}" required="true" disabled="false" />
              
             <h:outputLabel for="sexo" value="sexo: "  />  
-            <p:inputText id="sexo"  required="false" disabled="true"/> 
+            <p:inputText id="sexo"  value="#{actualizacionUsuarioBean.sexo}" required="true" disabled="false"/> 
             
             <h:outputLabel for="fechanacimiento" value="fechanacimiento: "  />  
-            <p:inputText id="fechanacimiento" value="#{actualizacionUsuarioBean.fechaNacmiento}" required="false" disabled="true"/>
+            <p:inputText id="fechanacimiento" value="#{actualizacionUsuarioBean.fechaNacmiento}" required="true" disabled="false"/>
             
             <h:outputLabel for="pais" value="pais: "  />  
-            <p:inputText id="pais" value="#{actualizacionUsuarioBean.pais}" required="false" disabled="true"/>
+            <p:inputText id="pais" value="#{actualizacionUsuarioBean.pais}" required="true" disabled="false"/>
             
             <h:outputLabel for="estado" value="estado: "  />  
-            <p:inputText id="estado" value="#{actualizacionUsuarioBean.estado}" required="false" disabled="true"/>
+            <p:inputText id="estado" value="#{actualizacionUsuarioBean.estado}" required="true" disabled="false"/>
             
             <h:outputLabel for="puesto" value="puesto: "  />  
-            <p:inputText id="puesto" value="#{actualizacionUsuarioBean.puesto}" required="false" disabled="true"/>
+            <p:inputText id="puesto" value="#{actualizacionUsuarioBean.puesto}" required="true" disabled="false"/>
             
             <h:outputLabel for="descripcion" value="descripcion: "  />  
-            <p:inputText id="descripcion" value="#{actualizacionUsuarioBean.descripcion}" required="false" disabled="true"/>
+            <p:inputText id="descripcion" value="#{actualizacionUsuarioBean.descripcion}" required="true" disabled="false"/>
             
-             <h:outputLabel for="rol" value="rol: "  />  
-             <p:inputText id="rol" value="#{actualizacionUsuarioBean.rol}" required="false" disabled="true"/>
+            <h:outputLabel for="rol" value="Nuevo Rol: "  />
+             <p:selectOneMenu id="rol" value="#{actualizacionUsuarioBean.rol}" required="true">  
+                <f:selectItem itemLabel="Asigna Rol" itemValue="" />  
+                <f:selectItems value="#{altaUsuarioBean.roles}" />  
+                <p:ajax  listener="#{altaUsuarioBean.handleCityChange}" />  
+            </p:selectOneMenu> 
              
               <h:outputLabel for="fechaalta" value="fecha alta:"  />  
-              <p:inputText id="fechaalta" value="#{actualizacionUsuarioBean.fechaInicio}" required="false" disabled="true"/>
+              <p:inputText id="fechaalta" value="#{actualizacionUsuarioBean.fechaInicio}" required="true" disabled="false"/>
               
         </h:panelGrid>
+        <p:commandButton value="Actualiza" icon="ui-icon-check" style="margin:0" action="#{actualizacionUsuarioBean.doActualizacion()}"/>
         </h:form>
         
         
