@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/08/2013 12:51:17 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.reserv.EstadoObjetoReservable" table="estado_objeto_reservable" schema="reservacion">
+        <id name="id" type="long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="motivo" class="com.reservaciones.mapeos.reserv.Motivo" fetch="select">
+            <column name="idmotivo" />
+        </many-to-one>
+        <many-to-one name="objetoReservable" class="com.reservaciones.mapeos.reserv.ObjetoReservable" fetch="select">
+            <column name="objeto_reservableid" />
+        </many-to-one>
+        <property name="fechadesde" type="timestamp">
+            <column name="fechadesde" length="29" />
+        </property>
+        <property name="fechahasta" type="timestamp">
+            <column name="fechahasta" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/08/2013 12:51:17 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.reserv.Categoria" table="categoria" schema="reservacion">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <set name="objetoReservables" inverse="true">
+            <key>
+                <column name="id_categoria" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.reserv.ObjetoReservable" />
+        </set>
+    </class>
+</hibernate-mapping>

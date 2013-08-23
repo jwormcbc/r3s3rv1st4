@@ -14,12 +14,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
  * @author DellXps15
  */
-@ManagedBean(name = "bajaUsuarioBean")
+@ManagedBean(name = "bajaUsuariosBean")
 @SessionScoped
 public class BajaUsuariosBean {
 
@@ -148,45 +149,15 @@ public class BajaUsuariosBean {
         this.rol = rol;
     }
 
-    public void doConsulta(){
-    
-        
-    FacesMessage messageOK;
-    FacesMessage messageERR;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    Date date = new Date();
-   
-    if(matricula.length()>0 && matricula!=null){
-    System.out.println("==consultando====>>>"+matricula);
-        messageERR = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error Problema al consultar usuario","err realizado consulta");
-        FacesContext.getCurrentInstance().addMessage(null, messageERR); 
-        
-        Usuarios u=cu.buscarUsuario(matricula);
-        this.nombre=u.getNombre();
-        this.apellidop=u.getApellido1();
-        this.apellidom=u.getApellido2();
-        this.sexo=u.getSexo();
-        this.fechaNacmiento=dateFormat.format(u.getFechanacimiento());
-        this.pais=u.getPais();
-        this.estado=u.getEstado();
-        this.puesto=u.getPuesto();
-        this.descripcion=u.getDescripcion();
-        this.rol=cu.buscarRolDeUsuario(matricula);
-        this.fechaInicio=""+dateFormat.format(u.getFechacreacion());
+   public void doBaja(){
+   System.out.println("baja==========>>> nombre " + nombre + "   matricula:" + matricula);
         
         
+        if(cu.eliminarUsuario(matricula))
+        RequestContext.getCurrentInstance().execute("dlg_bajas.hide(); alert('Baja Exitosa')");
+        else
+        RequestContext.getCurrentInstance().execute("alert('Problema Grave..');");
         
-        System.out.println("==vals====>>>"+nombre + "  " + apellidop + fechaInicio);
-        
-         FacesContext.getCurrentInstance().release();
-        messageOK = new FacesMessage(FacesMessage.SEVERITY_INFO, "OK Consulta de usuario correcta","consulta realizada");
-        FacesContext.getCurrentInstance().addMessage(null, messageOK);
-    }else{
-        FacesContext.getCurrentInstance().release();
-        messageOK = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Matricula vacia o incorrecta"," vuelve a ingresar el dato");
-        FacesContext.getCurrentInstance().addMessage(null, messageOK);
-    }
-    
     }
     
 }

@@ -58,45 +58,46 @@
         <p:messages id="messages" showDetail="false" autoUpdate="true"/>
         <h:panelGrid columns="2" id="pan_consulta"> 
             <h:outputLabel for="matricula" value="matricula a consultar: " />  
-            <p:inputText id="matricula" value="#{bajaUsuarioBean.matricula}" required="true">
+            <p:inputText id="matricula" value="#{bajaUsuariosBean.matricula}" required="true">
                 <p:ajax event="keyup" update="nombreo"   
                         oncomplete="callServletBaj();"/>  
             </p:inputText>
               
             <h:outputLabel id="nombreo" for="nombre" value="Nombre:"/>  
-            <p:inputText  id="nombre" value="#{bajaUsuarioBean.nombre}"  required="false" disabled="true"/> 
+            <p:inputText  id="nombre" value="#{bajaUsuariosBean.nombre}"  required="false" disabled="true"/> 
                  
             <h:outputLabel for="apellidop" value="apellidop: "  />  
-            <p:inputText id="apellidop" value="#{bajaUsuarioBean.apellidop}" required="false" disabled="true"/>
+            <p:inputText id="apellidop" value="#{bajaUsuariosBean.apellidop}" required="false" disabled="true"/>
             
             <h:outputLabel for="apellidom" value="apellidom: "  />  
-            <p:inputText id="apellidom" value="#{bajaUsuarioBean.apellidom}" required="false" disabled="true" />
+            <p:inputText id="apellidom" value="#{bajaUsuariosBean.apellidom}" required="false" disabled="true" />
              
             <h:outputLabel for="sexo" value="sexo: "  />  
             <p:inputText id="sexo"  required="false" disabled="true"/> 
             
             <h:outputLabel for="fechanacimiento" value="fechanacimiento: "  />  
-            <p:inputText id="fechanacimiento" value="#{bajaUsuarioBean.fechaNacmiento}" required="false" disabled="true"/>
+            <p:inputText id="fechanacimiento" value="#{bajaUsuariosBean.fechaNacmiento}" required="false" disabled="true"/>
             
             <h:outputLabel for="pais" value="pais: "  />  
-            <p:inputText id="pais" value="#{bajaUsuarioBean.pais}" required="false" disabled="true"/>
+            <p:inputText id="pais" value="#{bajaUsuariosBean.pais}" required="false" disabled="true"/>
             
             <h:outputLabel for="estado" value="estado: "  />  
-            <p:inputText id="estado" value="#{bajaUsuarioBean.estado}" required="false" disabled="true"/>
+            <p:inputText id="estado" value="#{bajaUsuariosBean.estado}" required="false" disabled="true"/>
             
             <h:outputLabel for="puesto" value="puesto: "  />  
-            <p:inputText id="puesto" value="#{bajaUsuarioBean.puesto}" required="false" disabled="true"/>
+            <p:inputText id="puesto" value="#{bajaUsuariosBean.puesto}" required="false" disabled="true"/>
             
             <h:outputLabel for="descripcion" value="descripcion: "  />  
-            <p:inputText id="descripcion" value="#{bajaUsuarioBean.descripcion}" required="false" disabled="true"/>
+            <p:inputText id="descripcion" value="#{bajaUsuariosBean.descripcion}" required="false" disabled="true"/>
             
-             <h:outputLabel for="rol" value="rol: "  />  
-             <p:inputText id="rol" value="#{bajaUsuarioBean.rol}" required="false" disabled="true"/>
+            <h:outputLabel for="rol" value="rol: "  />  
+            <p:inputText id="rol" value="#{bajaUsuariosBean.rol}" required="false" disabled="true"/>
              
-              <h:outputLabel for="fechaalta" value="fecha alta:"  />  
-              <p:inputText id="fechaalta" value="#{bajaUsuarioBean.fechaInicio}" required="false" disabled="true"/>
+            <h:outputLabel for="fechaalta" value="fecha alta:"  />  
+            <p:inputText id="fechaalta" value="#{bajaUsuariosBean.fechaInicio}" required="false" disabled="true"/>
               
         </h:panelGrid>
+        <p:commandButton value="Eliminar" icon="ui-icon-check" style="margin:0" action="#{bajaUsuariosBean.doBaja()}"/>
         </h:form>
         
         

@@ -16,5 +16,14 @@
     <mapping resource="com/reservaciones/mapeos/PermisosAcciones.hbm.xml"/>
     <mapping resource="com/reservaciones/mapeos/PermisoAcciones.hbm.xml"/>
     <mapping resource="com/reservaciones/mapeos/RolesPermisos.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Paises.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/EstadoObjetoReservable.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/ObjetoReservable.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Categoria.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Reservas.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Motivo.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Consumo.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Servicios.hbm.xml"/>
+    <mapping resource="com/reservaciones/mapeos/reserv/Historico.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

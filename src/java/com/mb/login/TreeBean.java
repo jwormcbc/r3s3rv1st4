@@ -40,6 +40,36 @@ public class TreeBean implements Serializable {
   
     public TreeBean(){}
     
+    
+    public TreeNode getTreeBeanReservaciones() {
+        root = new DefaultTreeNode("Root", null);
+        ControladorLogin controlador=new ControladorLogin();
+        LoginBean loginBean = (LoginBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("loginBean");
+        String permisos=controlador.GetPermisos(loginBean.getUsername());
+        String value="P"+permisos; 
+        Modulos modulo = Modulos.valueOf(value);
+        
+        switch(modulo){
+            case P777:
+                         node0 = new DefaultTreeNode("Reservar", root);  
+                         node1 = new DefaultTreeNode("Consultar", root);  
+                         node2 = new DefaultTreeNode("Hoy", root);
+                break;
+            case P775:   
+                         node0 = new DefaultTreeNode("Reservar", root);  
+                         node1 = new DefaultTreeNode("Consultar", root);  
+                         node2 = new DefaultTreeNode("Hoy", root); 
+                break;
+            default:
+                if(ninguno){
+                TreeNode nodeEmpty = new DefaultTreeNode("vacio", root);
+                }
+                break;
+        
+        }
+    return root;    
+    }  
+    
     public TreeNode getTreeBean() {
         root = new DefaultTreeNode("Root", null);
         ControladorLogin controlador=new ControladorLogin();
@@ -97,9 +127,6 @@ public class TreeBean implements Serializable {
                 break;
         
         }
-        
-   
-        
     return root;    
     }  
   
@@ -148,6 +175,12 @@ public class TreeBean implements Serializable {
                        RequestContext.getCurrentInstance().execute("dlg_bajas.show();");
                     }else if(nodo.equals("Bajas")){
                        RequestContext.getCurrentInstance().execute("dlg_bajas.show();");
+                    }else if(nodo.equals("Reservar")){
+                       RequestContext.getCurrentInstance().execute("dlg_reservar.show();");
+                    }else if(nodo.equals("Consultar")){
+                       RequestContext.getCurrentInstance().execute("dlg_consultar.show();");
+                    }else if(nodo.equals("Hoy")){
+                       RequestContext.getCurrentInstance().execute("dlg_hoy.show();");
                     }
                     
          }

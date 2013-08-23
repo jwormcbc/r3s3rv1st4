@@ -39,7 +39,7 @@
                          $("#form_actualizaciones\\:estado").val(response.split(",")[6]);
                          $("#form_actualizaciones\\:puesto").val(response.split(",")[7]);
                          $("#form_actualizaciones\\:descripcion").val(response.split(",")[8]);
-                         $("#form_actualizaciones\\:rol").val(response.split(",")[9]);
+                         $("#form_actualizaciones\\:rolName").val("actual:"+response.split(",")[9]);
                          $("#form_actualizaciones\\:fechaalta").val(response.split(",")[10]);
 		    	 
     	        }//success
@@ -47,6 +47,7 @@
                
             }
 
+           
              
          </script>
         
@@ -58,11 +59,11 @@
             
         <p:messages id="messages" showDetail="false" autoUpdate="true"/>
         <h:panelGrid columns="2" id="pan_consulta"> 
-            <h:outputLabel for="matricula" value="matricula a consultar: " />  
-            <p:inputText id="matricula" value="#{actualizacionUsuarioBean.matricula}" required="true">
+            <h:outputLabel for="matricula" value="matricula a modificar " />  
+            <p:inputMask id="matricula" value="#{actualizacionUsuarioBean.matricula}" required="true" mask="999999">
                 <p:ajax event="keyup" update="nombreo"   
                         oncomplete="callServletAct();"/>  
-            </p:inputText>
+            </p:inputMask>
               
             <h:outputLabel id="nombreo" for="nombre" value="Nombre:"/>  
             <p:inputText  id="nombre" value="#{actualizacionUsuarioBean.nombre}"  required="true" disabled="false"/> 
@@ -91,11 +92,11 @@
             <h:outputLabel for="descripcion" value="descripcion: "  />  
             <p:inputText id="descripcion" value="#{actualizacionUsuarioBean.descripcion}" required="true" disabled="false"/>
             
-            <h:outputLabel for="rol" value="Nuevo Rol: "  />
+            <p:inputText id="rolName" value="" required="false" disabled="true"/>
              <p:selectOneMenu id="rol" value="#{actualizacionUsuarioBean.rol}" required="true">  
-                <f:selectItem itemLabel="Asigna Rol" itemValue="" />  
+                <f:selectItem itemLabel="Asigna nuevo rol" itemValue="" />  
                 <f:selectItems value="#{altaUsuarioBean.roles}" />  
-                <p:ajax  listener="#{altaUsuarioBean.handleCityChange}" />  
+                <p:ajax  listener="#{altaUsuarioBean.handleCityChange}"/>  
             </p:selectOneMenu> 
              
               <h:outputLabel for="fechaalta" value="fecha alta:"  />  

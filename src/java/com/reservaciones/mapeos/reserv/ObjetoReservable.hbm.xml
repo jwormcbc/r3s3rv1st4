@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/08/2013 12:51:17 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.reserv.ObjetoReservable" table="objeto_reservable" schema="reservacion">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="categoria" class="com.reservaciones.mapeos.reserv.Categoria" fetch="select">
+            <column name="id_categoria" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="200" />
+        </property>
+        <set name="estadoObjetoReservables" inverse="true">
+            <key>
+                <column name="objeto_reservableid" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.reserv.EstadoObjetoReservable" />
+        </set>
+        <set name="consumos" inverse="true">
+            <key>
+                <column name="objeto_reservableid" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.reserv.Consumo" />
+        </set>
+        <set name="reservases" inverse="true">
+            <key>
+                <column name="objeto_reservableid" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.reserv.Reservas" />
+        </set>
+        <set name="historicos" inverse="true">
+            <key>
+                <column name="id_objetoreservable" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.reserv.Historico" />
+        </set>
+    </class>
+</hibernate-mapping>

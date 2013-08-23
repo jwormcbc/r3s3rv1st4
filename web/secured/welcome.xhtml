@@ -11,6 +11,12 @@
         <link rel="stylesheet" href="css/principal.css" type="text/css"/>
         <script src="../js/jquery-1.10.2.js"></script>
         <script src="js/init/INIT.js"></script>
+        
+        <script type="text/javascript" src="js/timeline/timeline.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/timeline/timeline.css"/>
+        <script type="text/javascript" src="js/timeline/timeline_reservista.js"></script>
+        <script type="text/javascript" src="js/timeline/timeline-locales.js"></script>
+        
         </h:head>
     <h:body>
 
@@ -25,7 +31,16 @@
 <p:layoutUnit position="west" size="200" header="Panel de Control" resizable="true" closable="true" collapsible="true">  
    
 <p:accordionPanel>  
-    <p:tab title="Reservaciones">     
+    <p:tab title="Reservaciones">
+    <h:form id="formReserva">
+        <p:tree value="#{treeBean.getTreeBeanReservaciones()}" var="nodeR" dynamic="true" style="width: 100%;" cache="false"  
+            selectionMode="single"  selection="#{treeBean.selectedNode}" id="treeReserva">  
+               <p:ajax event="select"   update=":form2:growl"  listener="#{treeBean.onNodeSelect}"/>
+        <p:treeNode>  
+            <h:outputText value="#{nodeR}" />  
+        </p:treeNode>  
+        </p:tree>
+    </h:form>
     </p:tab>  
     
     <p:tab title="Usuarios">  
@@ -41,8 +56,7 @@
     </p:tab>
     
     <p:tab title="Sistema">  
-       
-     <h:form id="formSystema">
+    <h:form id="formSystema">
         <p:tree value="#{treeBean.getTreeBeanSystema()}" var="nodeS" dynamic="true" style="width: 100%;" cache="false"  
             selectionMode="single"  selection="#{treeBean.selectedNode}" id="treeSystema">  
                <p:ajax event="select"   update=":form2:growl" />
@@ -52,18 +66,31 @@
         </p:tree>
         <p:commandLink action="#{loginBean.doLogout}" value="Salir"/> 
     </h:form>
-        
-    </p:tab>  
+    </p:tab>
+    
 </p:accordionPanel>   
 </p:layoutUnit>  
   
-    <p:layoutUnit position="south" size="100" header="informacion" resizable="true" closable="true" collapsible="true">  
-        <h:outputText value="Informcion en tiempo real tipo log... proximamente" />  
-    </p:layoutUnit>  
+    <p:layoutUnit position="south" size="400" header="Linea del Tiempo" resizable="true" closable="true" collapsible="true">    
+        <div id="mytimeline" style="width: 100%; height: 100%;"></div>
+        <div id="info"></div>
+   </p:layoutUnit>  
   
-    <p:layoutUnit position="center" header="Bienvenido #{loginBean.username}" >    
-    <p:commandLink action="#{loginBean.doLogout}" value="Logout"/>     
+    <p:layoutUnit position="center" header="Bienvenido #{loginBean.username}" >   
+        <a onclick="drawVisualization();"> clic pa mostrar el taim lain :-) </a>
+        
+        
     
+    <p:dialog header="Reservacion" widgetVar="dlg_reservar" resizable="true">  
+        <ui:include src="reservaciones/reservaciones_reservar.xhtml"/>
+    </p:dialog>
+    <p:dialog header="Consultar" widgetVar="dlg_consultar" resizable="true">  
+        <ui:include src="reservaciones/reservaciones_consultar.xhtml"/>
+    </p:dialog>
+    <p:dialog header="Hoy" widgetVar="dlg_hoy" resizable="true">  
+        <ui:include src="reservaciones/reservaciones_hoy.xhtml"/>
+    </p:dialog>
+        
     <p:dialog header="Alta de Usuario" widgetVar="dlg_altas" resizable="true">  
         <ui:include src="usuarios/usuarios_altas.xhtml"/>
     </p:dialog>
@@ -76,6 +103,8 @@
     <p:dialog header="Baja de Usuario" widgetVar="dlg_bajas" resizable="true">  
         <ui:include src="usuarios/usuarios_bajas.xhtml"/>
     </p:dialog>
+    
+    
     
     </p:layoutUnit> 
     

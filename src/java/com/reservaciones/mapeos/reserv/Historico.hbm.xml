@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/08/2013 12:51:17 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.reserv.Historico" table="historico" schema="reservacion">
+        <comment>Historico de todas las reservaciones, de objetos reserevables</comment>
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="objetoReservable" class="com.reservaciones.mapeos.reserv.ObjetoReservable" fetch="select">
+            <column name="id_objetoreservable" />
+        </many-to-one>
+        <many-to-one name="motivo" class="com.reservaciones.mapeos.reserv.Motivo" fetch="select">
+            <column name="id_motivo" />
+        </many-to-one>
+        <property name="desde" type="timestamp">
+            <column name="desde" length="29" />
+        </property>
+        <property name="hasta" type="timestamp">
+            <column name="hasta" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>

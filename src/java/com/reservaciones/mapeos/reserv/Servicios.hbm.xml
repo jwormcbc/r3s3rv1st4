@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/08/2013 12:51:17 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.reservaciones.mapeos.reserv.Servicios" table="servicios" schema="reservacion">
+        <id name="id" type="long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="400" />
+        </property>
+        <property name="cuotaPor" type="string">
+            <column name="cuota_por" length="10">
+                <comment>horas,segundos,dias,semanas,meses,a&#241;os ...</comment>
+            </column>
+        </property>
+        <property name="monto" type="java.lang.Double">
+            <column name="monto" scale="0" />
+        </property>
+        <set name="consumos" inverse="true">
+            <key>
+                <column name="serviciosid" />
+            </key>
+            <one-to-many class="com.reservaciones.mapeos.reserv.Consumo" />
+        </set>
+    </class>
+</hibernate-mapping>

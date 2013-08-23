@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <f:view contentType="text/html">
+    <h:head>
+        <title>Facelet Title</title>
+        
+         <script type="text/javascript">
+            
+            function refreshLinea(){
+            drawVisualization($('#form_reservar\\:res').val());
+            }
+            
+        </script>
+        
+        
+     </h:head>
+        <h:body>
+        
+        <h:outputScript library="js" name="calendar_es.js" />
+        <h:form id="form_reservar">   
+       
+            
+            <h:panelGrid columns="2" id="display">
+            <f:facet name="header">  
+            Checar Disponibilidad 
+            </f:facet>  
+             
+                 <h:outputLabel for="desde" value="Desde "  />
+                 <p:calendar value="#{reservacionesBean.desde}"  effect="slide" id="desde" pattern="dd/mm/yyyy HH:mm" locale="es"/>
+                 <h:outputLabel for="hasta" value="hasta "  />
+                 <p:calendar value="#{reservacionesBean.hasta}"  effect="slide" id="hasta" pattern="dd/mm/yyyy HH:mm" locale="es"/>
+                 
+                 <h:outputLabel for="objr" value="seleccionar: "  />  
+            <p:selectOneMenu id="objr" value="#{reservacionesBean.objReservable}" required="true">  
+                <f:selectItem itemLabel="objeto a reservar.." itemValue="" />  
+                <f:selectItems value="#{reservacionesBean.reservables}" />  
+                <p:ajax update="res,desc,cat" listener="#{reservacionesBean.handleValores()}" oncomplete="refreshLinea();"/>  
+            </p:selectOneMenu>
+            
+            <h:outputLabel for="res" value="seleccion: "  />
+                <h:inputText id="res" value="#{reservacionesBean.objReservable}" disabled="true"/>
+                <h:outputLabel for="desc" value="Descripcion: "  />
+                <h:inputText id="desc" value="#{reservacionesBean.objDescripcion}" disabled="true"/>
+                <h:outputLabel for="cat" value="Categoria: "  />
+                <h:inputText id="cat" value="#{reservacionesBean.objCategoria}" disabled="true"/>
+            </h:panelGrid>
+            
+            
+            
+            
+            
+            <h:panelGrid columns="1" > 
+                  <f:facet name="header">
+                        <p:column colspan="7">Datos del Cliente</p:column>
+                </f:facet>  
+                
+            <h:outputLabel for="folio" value="folio:*" />  
+            <p:inputMask id="folio" value="" required="true" mask="999999"/>  
+        </h:panelGrid> 
+        <h:panelGrid columns="4">
+            <h:outputLabel for="nombre" value="nombre: *"  />  
+            <p:inputText  id="nombre" value="" required="true"/> 
+            
+            <h:outputLabel for="apellidop" value="apellidop: *"  />  
+            <p:inputText id="apellidop" value="" required="true"/>
+            
+            <h:outputLabel for="apellidom" value="apellidom: *"  />  
+            <p:inputText id="apellidom" value="" required="true"/>
+             
+            <h:outputText value="Sexo: *" />  
+            <p:selectOneRadio id="sexo" value="">  
+                <f:selectItem itemLabel="hombre" itemValue="h" />  
+                <f:selectItem itemLabel="mujer" itemValue="m" />  
+            </p:selectOneRadio>
+            
+                <h:outputLabel for="edad" value="edad: *"  />  
+            <p:inputText id="edad" value="" required="true"/>
+            
+            <h:outputLabel for="pais" value="pais: *"  />  
+            <p:inputText id="pais" value="" required="true"/>
+            
+            <h:outputLabel for="estado" value="estado: *"  />  
+            <p:inputText id="estado" value="" required="true"/>
+            
+            <h:outputLabel for="descripcion" value="descripcion: "  />  
+            <p:inputText id="descripcion" value="" required="true"/>
+                        
+            </h:panelGrid>
+       
+            
+            <p:commandButton value="reservar" icon="ui-icon-check" style="margin:0"  action="#{reservacionesBean.mensaje()}"/>
+            <p:commandButton value="reservar y facturar" icon="ui-icon-check" style="margin:0"  action="#{reservacionesBean.mensaje()}"/>
+        
+        </h:form>
+        
+        
+
+        
+    </h:body>
+    </f:view>
+</html>
+
