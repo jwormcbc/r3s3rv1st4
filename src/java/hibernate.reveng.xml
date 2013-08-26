@@ -10,12 +10,4 @@
   <table-filter match-name="permisos_acciones"/>
   <table-filter match-name="roles_permisos"/>
   
-  <table-filter match-name="categoria"/>
-  <table-filter match-name="reservas"/>
-  <table-filter match-name="paises"/>
-  <table-filter match-name="estado_objeto_reservable"/>
-  <table-filter match-name="objeto_reservable"/>
-  <table-filter match-name="servicios"/>
-  <table-filter match-name="consumo"/>
-  <table-filter match-name="motivo"/>
 </hibernate-reverse-engineering>

@@ -14,8 +14,8 @@
         <property name="usuarioid" type="java.lang.Long">
             <column name="usuarioid" />
         </property>
-        <property name="fechadesde" type="time">
-            <column name="fechadesde" length="15" />
+        <property name="fechadesde" type="timestamp">
+            <column name="fechadesde" length="29" />
         </property>
         <property name="fechahasta" type="timestamp">
             <column name="fechahasta" length="29" />

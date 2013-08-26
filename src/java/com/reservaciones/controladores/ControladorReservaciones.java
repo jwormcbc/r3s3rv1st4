@@ -8,6 +8,7 @@ import com.reservaciones.daos.ReservacionesHelper;
 import com.reservaciones.jsoneitor.JsonSimple;
 import com.reservaciones.mapeos.Roles;
 import com.reservaciones.mapeos.reserv.Historico;
+import com.reservaciones.mapeos.reserv.Motivo;
 import com.reservaciones.mapeos.reserv.ObjetoReservable;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,7 +39,19 @@ public class ControladorReservaciones {
                     for(int i=0;i<roles.size();i++)
                     {
                     mobjs.put(""+i,roles.get(i));
-                    System.out.println("id:"+mobjs.get(""+i).getId() +"     "+mobjs.get(""+i).getNombre() + "   desc: "+mobjs.get(""+i).getDescripcion());
+                    //System.out.println("id:"+mobjs.get(""+i).getId() +"     "+mobjs.get(""+i).getNombre() + "   desc: "+mobjs.get(""+i).getDescripcion());
+                    }
+                    return mobjs;
+                    }
+    
+    public Map<String, Motivo> getMotivos(){
+                    List<Motivo> roles=rh.getMotivos();
+                    Map<String,Motivo> mobjs=new HashMap<String, Motivo>();
+
+                    for(int i=0;i<roles.size();i++)
+                    {
+                    mobjs.put(""+i,roles.get(i));
+                    //System.out.println("id:"+mobjs.get(""+i).getId() +"     "+mobjs.get(""+i).getNombre() + "   desc: "+mobjs.get(""+i).getDescripcion());
                     }
                     return mobjs;
                     }
@@ -54,9 +67,9 @@ public class ControladorReservaciones {
     
     
     
-    public boolean altaReservacion(int id_objres,int id_motivo,Date dede,Date hasta){
+    public boolean altaReservacion(String objres,int id_motivo,Date desde,Date hasta,String matricula){
     
-        if(rh.altaReserva(id_objres,id_motivo,dede, hasta))
+        if(rh.altaReserva(rh.getObjReservableIDByName(objres),id_motivo,desde, hasta,matricula))
             return true;
         
     return false;

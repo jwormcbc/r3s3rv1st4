@@ -60,22 +60,11 @@ public class ControladorUsuarios {
       
        public Usuarios buscarUsuario(String matricula){
            Usuarios u=uh.findUser(matricula);
-           try{
-           System.out.println("--->>>" + u.getNombre() + u.getMatricula());
-           }catch(NullPointerException e){
-           System.out.println("--->>> Usuario no encontrado :" + e.toString());
-           }
-           
            return u;
        }
        
          public String buscarRolDeUsuario(String matricula){
            String u=uh.getRolDeUsuario(matricula);
-           if(!u.equals("0")){
-           System.out.println("--rol id ->>>" + u);
-           }else{
-           System.out.println("--->>> Rol de Usuario no encontrado :");
-           }
            
            return u;
        }

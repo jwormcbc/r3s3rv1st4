@@ -49,53 +49,60 @@
                 <h:inputText id="desc" value="#{reservacionesBean.objDescripcion}" disabled="true"/>
                 <h:outputLabel for="cat" value="Categoria: "  />
                 <h:inputText id="cat" value="#{reservacionesBean.objCategoria}" disabled="true"/>
+             
+              <h:outputLabel for="motivo" value="seleccionar: "  />
+                <p:selectOneMenu id="motivo" value="#{reservacionesBean.motivo}" required="true">  
+                <f:selectItem itemLabel="Motivo .." itemValue="" />  
+                <f:selectItems value="#{reservacionesBean.motivos}" />  
+                <p:ajax  listener="#{reservacionesBean.handleValores2()}"/>  
+            </p:selectOneMenu>
             </h:panelGrid>
             
             
             
             
             
-            <h:panelGrid columns="1" > 
+            <h:panelGrid columns="1"> 
                   <f:facet name="header">
-                        <p:column colspan="7">Datos del Cliente</p:column>
+                        <p:column colspan="7">Datos del Cliente (desabilitado)</p:column>
                 </f:facet>  
                 
             <h:outputLabel for="folio" value="folio:*" />  
-            <p:inputMask id="folio" value="" required="true" mask="999999"/>  
+            <p:inputMask id="folio" value="" required="true" mask="999999" disabled="true"/>  
         </h:panelGrid> 
         <h:panelGrid columns="4">
-            <h:outputLabel for="nombre" value="nombre: *"  />  
-            <p:inputText  id="nombre" value="" required="true"/> 
+            <h:outputLabel for="nombre" value="nombre: *" />  
+            <p:inputText  id="nombre" value="" required="true"  disabled="true"/> 
             
             <h:outputLabel for="apellidop" value="apellidop: *"  />  
-            <p:inputText id="apellidop" value="" required="true"/>
+            <p:inputText id="apellidop" value="" required="true" disabled="true"/>
             
             <h:outputLabel for="apellidom" value="apellidom: *"  />  
-            <p:inputText id="apellidom" value="" required="true"/>
+            <p:inputText id="apellidom" value="" required="true" disabled="true"/>
              
             <h:outputText value="Sexo: *" />  
-            <p:selectOneRadio id="sexo" value="">  
+            <p:selectOneRadio id="sexo" value=""  disabled="true">  
                 <f:selectItem itemLabel="hombre" itemValue="h" />  
                 <f:selectItem itemLabel="mujer" itemValue="m" />  
             </p:selectOneRadio>
             
                 <h:outputLabel for="edad" value="edad: *"  />  
-            <p:inputText id="edad" value="" required="true"/>
+            <p:inputText id="edad" value="" required="true"  disabled="true"/>
             
             <h:outputLabel for="pais" value="pais: *"  />  
-            <p:inputText id="pais" value="" required="true"/>
+            <p:inputText id="pais" value="" required="true"  disabled="true"/>
             
             <h:outputLabel for="estado" value="estado: *"  />  
-            <p:inputText id="estado" value="" required="true"/>
+            <p:inputText id="estado" value="" required="true"  disabled="true"/>
             
             <h:outputLabel for="descripcion" value="descripcion: "  />  
-            <p:inputText id="descripcion" value="" required="true"/>
+            <p:inputText id="descripcion" value="" required="true"  disabled="true"/>
                         
             </h:panelGrid>
        
             
-            <p:commandButton value="reservar" icon="ui-icon-check" style="margin:0"  action="#{reservacionesBean.mensaje()}"/>
-            <p:commandButton value="reservar y facturar" icon="ui-icon-check" style="margin:0"  action="#{reservacionesBean.mensaje()}"/>
+            <p:commandButton value="reservar" icon="ui-icon-check" style="margin:0"  action="#{reservacionesBean.altaReservacion()}"/>
+            <p:commandButton value="reservar y facturar" icon="ui-icon-check" style="margin:0"  action="#{reservacionesBean.mensaje()}" disabled="true"/>
         
         </h:form>
         

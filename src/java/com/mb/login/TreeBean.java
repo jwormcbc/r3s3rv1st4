@@ -151,14 +151,12 @@ public class TreeBean implements Serializable {
     }  
   
     public void onNodeExpand(NodeExpandEvent event) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Expanded", event.getTreeNode().toString());  
-         System.out.println("===>>>       " + selectedNode);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Expanded", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }  
   
     public void onNodeCollapse(NodeCollapseEvent event) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Collapsed", event.getTreeNode().toString());  
-         System.out.println("===>>>       " + selectedNode);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Collapsed", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }  
   
@@ -185,14 +183,12 @@ public class TreeBean implements Serializable {
                     
          }
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seleccionado " + selectedNode, event.getTreeNode().toString());
-         System.out.println("select===>>>       " + selectedNode);
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }  
      
   
     public void onNodeUnselect(NodeUnselectEvent event) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());  
-         System.out.println("===>>>       " + selectedNode);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }  
 }  

@@ -22,7 +22,6 @@ public class ControladorLogin {
     public boolean LogIn(String matricula,String pass){
     LoginHelper lh= new LoginHelper();// desde hibernate helper
     for(Usuarios u: lh.findAllUser()){
-    System.out.println("id  " + u.getId() +"  matricula  " + u.getMatricula() + "  password: " + u.getPassword());
     if(u.getMatricula().equals(matricula) && u.getPassword().equals(pass))
     return true;
     }
@@ -33,7 +32,6 @@ public class ControladorLogin {
     public String GetPermisos(String matricula){
     LoginHelper lh= new LoginHelper();// desde hibernate helper
     PermisoAcciones p=lh.findUserPermisos(matricula);
-    System.out.println("id  " + p.getId() +" Nombre:  " + p.getNombre() + "  Mask: " + p.getMascara() + " Descripcion:" + p.getDescripcion());
     return p.getMascara().toString();
     }
     

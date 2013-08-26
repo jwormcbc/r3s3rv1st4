@@ -49,8 +49,8 @@ public class JsonSimple {
              
              calDesde.setTime(his.getDesde());
              calHasta.setTime(his.getHasta());
-             System.out.println(his.getId() +"    " + calDesde.get(Calendar.YEAR) + "     " + calDesde.get(Calendar.MONTH) + "     " +  calDesde.get(Calendar.DAY_OF_MONTH)  +
-             "  motivo:" + his.getMotivo().getDescripcion()+ "    obj reservable:" + his.getObjetoReservable().getNombre());
+             /*System.out.println(his.getId() +"    " + calDesde.get(Calendar.YEAR) + "     " + calDesde.get(Calendar.MONTH) + "     " +  calDesde.get(Calendar.DAY_OF_MONTH)  +
+             "  motivo:" + his.getMotivo().getDescripcion()+ "    obj reservable:" + his.getObjetoReservable().getNombre());*/
              
              
             objson=new JSONObject();

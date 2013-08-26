@@ -5,8 +5,10 @@
 package com.reservaciones.daos;
 
 import com.reservaciones.mapeos.HibernateUtil;
+import com.reservaciones.mapeos.Usuarios;
 import com.reservaciones.mapeos.reserv.Historico;
 import com.reservaciones.mapeos.reserv.Motivo;
+import com.reservaciones.mapeos.reserv.Reservas;
 import com.reservaciones.mapeos.reserv.ObjetoReservable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +40,19 @@ public class ReservacionesHelper {
     }
     return objetosReservables;
 }
+  
+    public List<Motivo> getMotivos() {
+    List<Motivo> motivos=null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        Query q = session.createQuery ("from Motivo");
+        motivos = (List<Motivo>) q.list();
+        
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return motivos;
+}
    
    public int getObjReservableIDByName(String nombre) {
     int objetosReservableId=0;
@@ -50,24 +65,34 @@ public class ReservacionesHelper {
     }
     return objetosReservableId;
 }
+   
   
-  public boolean altaReserva(int id_ObjRes,int id_Motivo,Date desde,Date hasta) {
+  public boolean altaReserva(int id_ObjRes,int id_Motivo,Date desde,Date hasta,String matricula) {
         
     
     try {
         Session session=this.session.getSessionFactory().openSession();
         org.hibernate.Transaction tx = session.beginTransaction();
         
-        Query q=session.createQuery("from ObjetoReservable where id='"+id_ObjRes+"'");
+        Query q=session.createQuery("from ObjetoReservable where id="+id_ObjRes+"");
         ObjetoReservable objRes=(ObjetoReservable)q.uniqueResult();
-        q=session.createQuery("from Motivo where id='"+id_Motivo+"'");
+        q=session.createQuery("from Motivo where id="+id_Motivo+"");
         Motivo motivo=(Motivo)q.uniqueResult();
+        q=session.createQuery("from Usuarios where matricula='"+matricula+"'");
+        Usuarios usuario=(Usuarios)q.uniqueResult();
         
         q = session.createQuery (" from Historico where id=(select max(id) from Historico) ");
         Historico historicoUltimo = (Historico) q.uniqueResult();
         System.out.println("historico OK!!" + (historicoUltimo.getId()+1));
         Historico nuevoHistorico=new Historico(historicoUltimo.getId()+1, objRes,motivo,desde,hasta);
         session.save(nuevoHistorico);
+        
+        q = session.createQuery (" from Reservas where id=(select max(id) from Reservas) ");
+        Reservas reservasUltima = (Reservas) q.uniqueResult();
+        System.out.println("reserva OK!!" + (reservasUltima.getId()+1));
+        Reservas reservas=new Reservas(reservasUltima.getId()+1,objRes,Long.parseLong(Integer.toString(usuario.getId())),desde,hasta);
+        session.save(reservas);
+        
         
         session.getTransaction().commit();
         return true;
