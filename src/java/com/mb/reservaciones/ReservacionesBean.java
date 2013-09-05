@@ -149,13 +149,11 @@ public class ReservacionesBean {
      public void altaReservacion(){
          LoginBean loginBean = (LoginBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("loginBean");
          System.out.println("-------> altaeservacion.." + motivoId + "   " +  motivo + "   "  + desde  + "   " +  hasta);
-         
-         if(cr.altaReservacion(objReservable, Integer.parseInt(motivo), desde, hasta, loginBean.getUsername()))
-              RequestContext.getCurrentInstance().execute("dlg_reservar.hide(); alert('Accion Exitosa')");
-        else
-              RequestContext.getCurrentInstance().execute("alert('Problema Grave')");
-       
-         
-         System.out.println("-------> tsssssss..");
+                
+                if(cr.altaReservacion(objReservable, Integer.parseInt(motivo), desde, hasta, loginBean.getUsername()))
+                     RequestContext.getCurrentInstance().execute("dlg_reservar.hide(); alert('Accion Exitosa')");
+               else
+                     RequestContext.getCurrentInstance().execute("alert('Problema Grave')");
+                
     }
 }   

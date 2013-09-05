@@ -23,8 +23,67 @@
      
         function drawVisualization(jsonName) {
    //$.getJSON(server+"/recursos/test.json", function(dataj) {
+   
+   
+   
+   
+   /*
+    * Realiza la opcion 2 de /TMServlet pues es la que nos devuelve la consulta historica en Json del elemento
+    */
+$(document).ready(function() {
+$.ajaxSetup({ cache: false });
+});
+     $.ajax(
+    {
+        url: server+'/TMServlet',
+        data: {opc:'2',nom:jsonName},
+        success: function(response)
+        {
+                           var dataj=null;
+                           console.log(response);
+                           eval("dataj="+ response + ";"); // Codifica a Json 
+                           
+                           
+    var dataSize=dataj.length;
+    for(var i=0;i<dataSize;i++){
+    dataj[i].start=eval(dataj[i].start);
+    dataj[i].end=eval(dataj[i].end);
+    console.log("start:" +dataj[i].start +"  end:" + dataj[i].end + "   index:" + i);
+   }
+       data=dataj;
+   
+   console.log(data);
+            // opciones
+            var options = {
+                'width':  '100%',
+                'height': '300px',
+                'editable': true,   // temporal, eventos
+                'style': 'box',
+                'locale' : 'es'
+            };
+            
+
+            // Instanciamos
+            timeline = new links.Timeline(document.getElementById('mytimeline'));
+            function onRangeChanged(properties) {
+                document.getElementById('info').innerHTML += 'rangechanged ' +
+                        properties.start + ' - ' + properties.end + '<br>';
+            }
+
+            // attach an event listener using the links events handler
+            links.events.addListener(timeline, 'rangechanged', onRangeChanged);
+            links.events.addListener(timeline, 'select', onselect);
+
+            // Draw our timeline with the created data and options
+            timeline.draw(data, options);
+                           
+                           
+        }
+    });
+   
+   
+  /*
    $.getJSON("recursos/json/"+jsonName+".json", function(dataj) {
-     
     console.log('shialesss---- - - - -');
     var dataSize=dataj.length;
     for(var i=0;i<dataSize;i++){
@@ -59,8 +118,7 @@
             // Draw our timeline with the created data and options
             timeline.draw(data, options);
    
-   });
-    
+   });*/
             
         }
         

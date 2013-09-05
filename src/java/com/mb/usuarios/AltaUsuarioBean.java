@@ -51,7 +51,6 @@ public class AltaUsuarioBean {
         Map<String, Roles> rolesHM=new HashMap<String, Roles>();
         rolesHM=cu.getRoles();
         for(int i=0;i<rolesHM.size();i++){
-        System.out.println("________________>>>>"+rolesHM.get(""+i).getNombre());
         roles.put(rolesHM.get(""+i).getNombre(), rolesHM.get(""+i).getNombre());
         
         }

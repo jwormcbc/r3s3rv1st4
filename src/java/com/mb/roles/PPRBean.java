@@ -42,7 +42,6 @@ public class PPRBean implements Serializable {
         Map<String, Roles> rolesHM=new HashMap<String, Roles>();
         rolesHM=cu.getRoles();
         for(int i=0;i<rolesHM.size();i++){
-        System.out.println("________________>>>>"+rolesHM.get(""+i).getNombre());
         cities.put(rolesHM.get(""+i).getNombre(), rolesHM.get(""+i).getNombre());
         }
           
@@ -123,7 +122,6 @@ public class PPRBean implements Serializable {
             suburbs = new HashMap<String, String>();  
     
     
-    System.out.println("________________Selected>>>>"+city);
     
     }  
   

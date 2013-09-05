@@ -4,11 +4,9 @@
  */
 package com.servlets.usuarios;
 
-import com.reservaciones.controladores.ControladorUsuarios;
-import com.reservaciones.mapeos.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -20,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DellXps15
  */
-public class ServiciosReservista extends HttpServlet {
-private ControladorUsuarios cu=new ControladorUsuarios();
-private static final int campos=11;
+public class TMServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -33,48 +30,53 @@ private static final int campos=11;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-        String matricula="";
-        if(request.getParameter("matricula")!=null)
-            matricula=request.getParameter("matricula");
-        
-        
-        
+        boolean proceder=false;
+        int opc=0;
+        String errExceptions="";
         try {
             /* TODO output your page here. You may use following sample code. */
-
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = new Date();
-            String mensajeFinal="";
-            
-    if(matricula.length()>5 && matricula!=null && !matricula.contains("_")){
-        Usuarios u=cu.buscarUsuario(matricula);
-        mensajeFinal+=u.getNombre()+",";
-        mensajeFinal+=u.getApellido1()+",";;
-        mensajeFinal+=u.getApellido2()+",";;
-        mensajeFinal+=u.getSexo()+",";;
-        mensajeFinal+=dateFormat.format(u.getFechanacimiento())+",";;
-        mensajeFinal+=u.getPais()+",";;
-        mensajeFinal+=u.getEstado()+",";;
-        mensajeFinal+=u.getPuesto()+",";;
-        mensajeFinal+=u.getDescripcion()+",";;
-        mensajeFinal+=cu.buscarRolDeUsuario(matricula)+",";;
-        mensajeFinal+=""+dateFormat.format(u.getFechacreacion());
-        out.println(mensajeFinal);
-    }else{
-    
-        for(int i=0;i<campos;i++)
-            if(i<campos-2)
-            mensajeFinal+="-,";
-            else
-            mensajeFinal+="-"; 
         
-    }
-    } finally {            
+            String opcion=request.getParameter("opc");
+            if( opcion != null && opcion.length()>0){
+                    try{
+                        opc=Integer.parseInt(opcion);
+                        proceder=true;
+                    }catch(Exception e){
+                        System.out.println(" " + e.toString());
+                        errExceptions=e.toString();
+                    }
+            }else
+            proceder=false;
+            
+            
+            
+            String nom=request.getParameter("nom");
+            if( nom != null && nom.length()>0)
+            proceder=true;
+            else
+            proceder=false;
+            
+          
+             
+            switch(opc){
+                case 2:
+                    if(proceder)
+                    out.print(new com.reservaciones.controladores.ControladorReservaciones().consultaHistoricoAJsonTimeline(nom));
+                    else
+                    out.println("Err. proceder:" + proceder);
+                    break;
+                default:
+                     out.println("[{\"content\":\"Err, opcion invalida en TMServlet. checar opc var \",\"start\":\"new Date(2013,1,1)\",\"end\":\"new Date(2013,5,5)\"}]");
+                    break;
+            }
+            
+        
+        
+        } finally {            
             out.close();
         }
     }

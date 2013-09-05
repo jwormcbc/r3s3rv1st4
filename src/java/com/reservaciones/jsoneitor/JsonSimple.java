@@ -110,5 +110,41 @@ public class JsonSimple {
  
  return false;
      }
+     
+       public String leedor(String fileName){
+         JSONParser parser = new JSONParser();
+         JSONArray jsonObject=null;
+        try {
+ 
+                Object obj = parser.parse(new FileReader(localPath+"\\"+fileName+".json"));
+ 
+                jsonObject = (JSONArray) obj;
+               
+ /*
+                name = (String) jsonObject.get("titulo");
+                String descripcion = (String) jsonObject.get("descripcion");
+                JSONArray msg = (JSONArray) jsonObject.get("clientes");
+                Iterator<JSONObject> iterator = msg.iterator();
+                while (iterator.hasNext()) {
+                        JSONObject objJtmp=iterator.next();
+                        System.out.println("Generando lista de ofertas......");
+                        ofertas+="<li id=\""+objJtmp.get("nombre") +"\" title=\""+ objJtmp.get("lonlat") +"\" ><h1>"+ objJtmp.get("mensage") +"<h1></li>";
+                        System.out.println("----->>>>        " + ofertas);
+                        System.out.println("Lista de Ofertas OK!");
+                       cont++;
+                }
+ */
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        } catch (ParseException e) {
+                e.printStackTrace();
+        }
+     
+       
+        return jsonObject.toJSONString();
+       
+     }
  
 }

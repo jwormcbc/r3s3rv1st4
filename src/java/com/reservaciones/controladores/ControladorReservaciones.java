@@ -65,7 +65,14 @@ public class ControladorReservaciones {
     
     }
     
+      public String consultaHistoricoAJsonTimeline(String nombre){
     
+        if(jsoneitor.escribidor(rh.getObjHistorico(rh.getObjReservableIDByName(nombre)),nombre))
+            return jsoneitor.leedor(nombre);
+        else 
+            return "Err. consultaHistoricoJsonTimelLine!";
+    
+    }
     
     public boolean altaReservacion(String objres,int id_motivo,Date desde,Date hasta,String matricula){
     

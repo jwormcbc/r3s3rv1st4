@@ -152,7 +152,7 @@ public class ActualizacionUsuariosBean {
     public void doActualizacion(){
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date();
-    System.out.println("Actualizacion==========>>>"+dateFormat.format(date) +"  nombre " + nombre + "   fn:" + fechaNacmiento  + rol +  "sex  " + sexo);
+    //System.out.println("Actualizacion==========>>>"+dateFormat.format(date) +"  nombre " + nombre + "   fn:" + fechaNacmiento  + rol +  "sex  " + sexo);
     if(sexo.equalsIgnoreCase("hombre"))
         sexo="h";
     else
