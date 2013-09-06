@@ -4,6 +4,7 @@
  */
 package com.mb.login;
 
+import com.mb.reservaciones.Path;
 import com.reservaciones.controladores.ControladorLogin;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
@@ -11,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -26,10 +28,21 @@ public class LoginBean implements Serializable {
     private String password;
     private ControladorLogin controladorLogin=new ControladorLogin();
     private boolean loggedIn;
- 
+    private String realPath;
     @ManagedProperty(value="#{navigationBean}")
     private NavigationBean navigationBean;
      
+    
+    
+    public LoginBean(){
+         
+            ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            System.out.println("PATHREAL: " + ctx.getRealPath("/"));  
+            setRealPath(ctx.getRealPath("/"));//Obtenemos la ruta completa al servidor. Para Anular la necesidad de config files
+            
+    }
+    
+    
     /**
      * Login operation.
      * @return
@@ -97,6 +110,22 @@ public class LoginBean implements Serializable {
  
     public void setNavigationBean(NavigationBean navigationBean) {
         this.navigationBean = navigationBean;
+    }
+    
+       public ControladorLogin getControladorLogin() {
+        return controladorLogin;
+    }
+
+    public void setControladorLogin(ControladorLogin controladorLogin) {
+        this.controladorLogin = controladorLogin;
+    }
+
+    public String getRealPath() {
+        return realPath;
+    }
+
+    public void setRealPath(String realPath) {
+        this.realPath = realPath;
     }
      
 }

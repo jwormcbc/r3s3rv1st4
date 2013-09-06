@@ -4,11 +4,13 @@
  */
 package com.servlets.usuarios;
 
+import com.mb.login.LoginBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,9 +39,12 @@ public class TMServlet extends HttpServlet {
         boolean proceder=false;
         int opc=0;
         String errExceptions="";
+       
         try {
             /* TODO output your page here. You may use following sample code. */
         
+            
+            
             String opcion=request.getParameter("opc");
             if( opcion != null && opcion.length()>0){
                     try{

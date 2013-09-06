@@ -4,6 +4,8 @@
  */
 package com.reservaciones.controladores;
 
+import com.mb.login.LoginBean;
+import com.mb.reservaciones.Path;
 import com.reservaciones.daos.ReservacionesHelper;
 import com.reservaciones.jsoneitor.JsonSimple;
 import com.reservaciones.mapeos.Roles;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -21,16 +24,18 @@ import java.util.Map;
  */
 public class ControladorReservaciones {
     ReservacionesHelper rh=new ReservacionesHelper();
-    JsonSimple jsoneitor=new JsonSimple("C:\\Lanconta\\Proyectos\\JSFLogin\\web\\secured\\recursos\\json");
-    
+    //JsonSimple jsoneitor=new JsonSimple("C:\\Lanconta\\Proyectos\\JSFLogin\\web\\secured\\recursos\\json\\");
+    //JsonSimple jsoneitor=new JsonSimple("/usr/local/tomcat7/webapps/Lanconta_Reservista/secured/recursos/json/");
+    JsonSimple jsoneitor;
+        
     public static void main(String args[]){
-    
+        Path.PATH="C:\\Lanconta\\Proyectos\\JSFLogin\\web\\secured\\recursos\\json\\";
         ControladorReservaciones cr=new ControladorReservaciones();
-        cr.creaHistoricoAJsonTimeline("habitacion2");
-        
-        
     }
     
+    public ControladorReservaciones(){
+    jsoneitor=new JsonSimple(com.mb.reservaciones.Path.PATH+"secured\\recursos\\json\\");
+    }
     
     public Map<String,ObjetoReservable> getObjReserv(){
                     List<ObjetoReservable> roles=rh.getObjReservables();

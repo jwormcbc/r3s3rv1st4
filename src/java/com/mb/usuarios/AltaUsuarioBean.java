@@ -4,6 +4,7 @@
  */
 package com.mb.usuarios;
 
+import com.mb.login.LoginBean;
 import com.reservaciones.controladores.ControladorUsuarios;
 import com.reservaciones.mapeos.Roles;
 import java.text.DateFormat;
@@ -15,6 +16,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -47,7 +50,7 @@ public class AltaUsuarioBean {
      */
     
         public AltaUsuarioBean() {
-            
+        
         Map<String, Roles> rolesHM=new HashMap<String, Roles>();
         rolesHM=cu.getRoles();
         for(int i=0;i<rolesHM.size();i++){

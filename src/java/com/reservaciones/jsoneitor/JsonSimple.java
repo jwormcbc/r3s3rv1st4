@@ -25,11 +25,10 @@ import org.json.simple.parser.ParseException;
 
 
 public class JsonSimple {
-    //final static String localPath="/var/lib/tomcat7/webapps/Seller-Map_v2/"; //amazon
-    final private String localPath;//"C:\Lanconta\Proyectos\JSFLogin\web\secured\js\timeline"; //local
+    final private String localPath;
     public static void main(String arga[]){
     System.out.println("jsoneando again!!!");
-    new JsonSimple("C:\\Lanconta\\Proyectos\\JSFLogin\\web\\secured\\recursos\\json").escribidor();
+    new JsonSimple("C:\\Lanconta\\Proyectos\\JSFLogin\\web\\secured\\recursos\\json\\").escribidor();
     }
     
     public JsonSimple(String absolutoPath){
@@ -54,8 +53,8 @@ public class JsonSimple {
              
              
             objson=new JSONObject();
-            objson.put("start"  , "new Date("+calDesde.get(Calendar.YEAR)+","+(calDesde.get(Calendar.MONTH)+1)+","+calDesde.get(Calendar.DAY_OF_MONTH)+")");
-            objson.put("end"    , "new Date("+calHasta.get(Calendar.YEAR)+","+(calHasta.get(Calendar.MONTH)+1)+","+calHasta.get(Calendar.DAY_OF_MONTH)+")");
+            objson.put("start"  , "new Date("+calDesde.get(Calendar.YEAR)+","+(calDesde.get(Calendar.MONTH))+","+calDesde.get(Calendar.DAY_OF_MONTH)+")");
+            objson.put("end"    , "new Date("+calHasta.get(Calendar.YEAR)+","+(calHasta.get(Calendar.MONTH))+","+calHasta.get(Calendar.DAY_OF_MONTH)+")");
             objson.put("content", "motivo:"+his.getMotivo().getDescripcion()+"<br><img src='js/timeline/img/32/"+his.getMotivo().getDescripcion()+".jpg' style='width:32px; height:32px;'><h2>"+his.getObjetoReservable().getNombre()+"</h2>");
 
             list.add(objson);
@@ -64,7 +63,7 @@ public class JsonSimple {
         
 	try {
  
-		FileWriter file = new FileWriter(localPath+"\\"+fileName+".json");
+		FileWriter file = new FileWriter(localPath+fileName+".json");
 		file.write(list.toJSONString());
 		file.flush();
 		file.close();
@@ -98,7 +97,7 @@ public class JsonSimple {
  
 	try {
  
-		FileWriter file = new FileWriter(localPath+"\\test.json");
+		FileWriter file = new FileWriter(localPath+"test.json");
 		file.write(list.toJSONString());
 		file.flush();
 		file.close();
@@ -116,10 +115,8 @@ public class JsonSimple {
          JSONArray jsonObject=null;
         try {
  
-                Object obj = parser.parse(new FileReader(localPath+"\\"+fileName+".json"));
- 
+                Object obj = parser.parse(new FileReader(localPath+fileName+".json"));
                 jsonObject = (JSONArray) obj;
-               
  /*
                 name = (String) jsonObject.get("titulo");
                 String descripcion = (String) jsonObject.get("descripcion");

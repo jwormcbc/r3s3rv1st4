@@ -4,7 +4,12 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.ProgressDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <!-- Produccion -->
+    <!--<property name="hibernate.connection.url">jdbc:postgresql://54.213.21.117:5432/reservaciones</property>-->
+    <!--Produccion -->
+    <!-- Develop -->
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/reservaciones</property>
+    <!-- Develop -->
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">postgres</property>
     <property name="hibernate.show_sql">false</property>

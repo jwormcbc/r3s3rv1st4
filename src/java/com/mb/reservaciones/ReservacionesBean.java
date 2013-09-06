@@ -32,7 +32,7 @@ public class ReservacionesBean {
     private Date hasta;
     private Map<String,String> reservables=new HashMap<String, String>();
     private Map<String,String> motivos=new HashMap<String, String>();
-    private ControladorReservaciones cr=new ControladorReservaciones();
+    private ControladorReservaciones  cr;
     private Map<String,Map<String,String>> suburbsData = new HashMap<String, Map<String,String>>();
     private Map<String, ObjetoReservable> objsHM;
     private Map<String, Motivo> mtvsHM;
@@ -110,6 +110,12 @@ public class ReservacionesBean {
     }
 
     public ReservacionesBean() {
+        
+        LoginBean loginBean = (LoginBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("loginBean");
+        Path.PATH=loginBean.getRealPath();
+        System.out.println("Path:  " + Path.PATH );
+        cr=new ControladorReservaciones();
+        
         objsHM=new HashMap<String, ObjetoReservable>();
         objsHM=cr.getObjReserv();
         for(int i=0;i<objsHM.size();i++)
@@ -120,6 +126,9 @@ public class ReservacionesBean {
         for(int i=0;i<mtvsHM.size();i++)
         motivos.put( mtvsHM.get(""+i).getDescripcion(),Integer.toString(mtvsHM.get(""+i).getId()));
     
+        
+        
+        
     }
     
         /*
@@ -151,7 +160,7 @@ public class ReservacionesBean {
          System.out.println("-------> altaeservacion.." + motivoId + "   " +  motivo + "   "  + desde  + "   " +  hasta);
                 
                 if(cr.altaReservacion(objReservable, Integer.parseInt(motivo), desde, hasta, loginBean.getUsername()))
-                     RequestContext.getCurrentInstance().execute("dlg_reservar.hide(); alert('Accion Exitosa')");
+                     RequestContext.getCurrentInstance().execute("dlg_reservar.hide(); alert('Accion Exitosa'); refreshLinea();");
                else
                      RequestContext.getCurrentInstance().execute("alert('Problema Grave')");
                 
